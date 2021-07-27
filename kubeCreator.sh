@@ -78,11 +78,12 @@ sed -i '$a export http_proxy=http://10.239.57.126:443/  \
 
 source ${bashrc}
 
+kubeadm init --apiserver-advertise-address=${localip} --service-cidr=10.96.0.0/16
+
 mkdir -p $HOME/.kube
          cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
          chown root:root $HOME/.kube/config
 
-kubeadm init --apiserver-advertise-address=${localip} --service-cidr=10.96.0.0/16
 kubectl taint nodes --all node-role.kubernetes.io/master-
 export KUBECONFIG=/etc/kubernetes/kubelet.conf
 export KUBECONFIG=/etc/kubernetes/admin.conf
